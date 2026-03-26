@@ -5,8 +5,8 @@ import { SdDetailClient } from "./sd-detail-client";
 
 type Props = { params: { slug: string } };
 
-export default function SystemDesignDetailPage({ params }: Props) {
-  const row = getSdBySlug(params.slug);
+export default async function SystemDesignDetailPage({ params }: Props) {
+  const row = await getSdBySlug(params.slug);
   if (!row) notFound();
 
   return (

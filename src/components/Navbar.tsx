@@ -1,57 +1,118 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/lib/button-variants";
 import { cn } from "@/lib/utils";
 import { ApiKeySettings } from "@/components/ApiKeySettings";
 
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/system-design", label: "System Design" },
+  { href: "/lld", label: "LLD" },
+];
+
 export function Navbar() {
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:h-16 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:py-0">
-        <Link href="/" className="shrink-0">
-          <p className="text-foreground text-base font-semibold tracking-tight">Interview Prep Portal</p>
-          <p className="text-muted-foreground text-xs">DSA · HLD · LLD</p>
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-0 h-14 sm:h-16">
+        <Link href="/" className="shrink-0 group">
+          <span className="text-base font-bold tracking-tight bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Interview Prep
+          </span>
         </Link>
-        <nav className="flex flex-wrap items-center gap-2 sm:ml-auto sm:flex-nowrap sm:justify-end sm:gap-1.5">
-          <div className="flex flex-wrap items-center gap-1">
+
+        <nav className="hidden items-center gap-1 sm:flex">
+          {navLinks.map((link) => (
             <Link
-              href="/system-design"
+              key={link.href}
+              href={link.href}
               className={cn(
-                buttonVariants({ variant: "ghost" }),
-                "text-foreground h-9 px-3 whitespace-nowrap",
+                "relative px-3 py-1.5 text-sm font-medium transition-colors rounded-md",
+                isActive(link.href)
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
-              System Design
+              {link.label}
+              {isActive(link.href) && (
+                <motion.div
+                  layoutId="navbar-indicator"
+                  className="absolute inset-x-1 -bottom-[13px] h-0.5 rounded-full bg-primary"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                />
+              )}
             </Link>
-            <Link
-              href="/lld"
-              className={cn(buttonVariants({ variant: "ghost" }), "text-foreground h-9 px-3 whitespace-nowrap")}
-            >
-              LLD
-            </Link>
-          </div>
-          <div className="mx-1 hidden h-6 w-px shrink-0 bg-border sm:block" aria-hidden />
-          <div className="flex shrink-0 items-center gap-1">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-foreground relative size-8 shrink-0 overflow-hidden"
-              aria-label="Toggle theme"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <Sun className="pointer-events-none absolute inset-0 m-auto h-5 w-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-              <Moon className="pointer-events-none absolute inset-0 m-auto h-5 w-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-            </Button>
-            <ApiKeySettings />
-          </div>
+          ))}
         </nav>
+
+        <div className="flex items-center gap-1.5">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative size-8 overflow-hidden rounded-full"
+            aria-label="Toggle theme"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          >
+            <Sun className="absolute inset-0 m-auto h-4 w-4 rotate-0 scale-100 transition-transform duration-300 dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute inset-0 m-auto h-4 w-4 rotate-90 scale-0 transition-transform duration-300 dark:rotate-0 dark:scale-100" />
+          </Button>
+          <ApiKeySettings />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-8 sm:hidden"
+            aria-label="Menu"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </Button>
+        </div>
       </div>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-border/40 sm:hidden"
+          >
+            <nav className="flex flex-col gap-1 px-4 py-3">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={cn(
+                    "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    isActive(link.href)
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

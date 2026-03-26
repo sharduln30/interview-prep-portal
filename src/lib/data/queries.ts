@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { count, desc, eq } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { dsaProblems, ingestRuns, lldProblems, sdProblems } from "@/db/schema";
 import companies from "@/lib/data/companies.json";
@@ -78,71 +78,72 @@ function rowToLld(r: typeof lldProblems.$inferSelect): LldProblemRow {
   };
 }
 
-export function ensureDataLoaded(): void {
-  bootstrapFromSeedIfEmpty();
+export async function ensureDataLoaded(): Promise<void> {
+  await bootstrapFromSeedIfEmpty();
 }
 
-export function getCompaniesWithCounts(): (Company & { dsaCount: number; sdCount: number; lldCount: number })[] {
-  ensureDataLoaded();
+export async function getCompaniesWithCounts(): Promise<(Company & { dsaCount: number; sdCount: number; lldCount: number })[]> {
+  await ensureDataLoaded();
   const db = getDb();
-  const allDsa = db.select().from(dsaProblems).all();
-  const allSd = db.select().from(sdProblems).all();
-  const allLld = db.select().from(lldProblems).all();
+  const [allDsa, allSd, allLld] = await Promise.all([
+    db.select().from(dsaProblems),
+    db.select().from(sdProblems),
+    db.select().from(lldProblems),
+  ]);
   const list = companies as Company[];
 
   return list.map((c) => {
-    const dsaCount = allDsa.filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(c.slug))
-      .length;
-    const sdCount = allSd.filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(c.slug))
-      .length;
-    const lldCount = allLld.filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(c.slug))
-      .length;
+    const dsaCount = allDsa.filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(c.slug)).length;
+    const sdCount = allSd.filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(c.slug)).length;
+    const lldCount = allLld.filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(c.slug)).length;
     return { ...c, dsaCount, sdCount, lldCount };
   });
 }
 
-export function listDsaForCompany(companySlug: string): DsaProblemRow[] {
-  ensureDataLoaded();
+export async function listDsaForCompany(companySlug: string): Promise<DsaProblemRow[]> {
+  await ensureDataLoaded();
   const db = getDb();
-  const rows = db.select().from(dsaProblems).all();
+  const rows = await db.select().from(dsaProblems);
   return rows
     .filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(companySlug))
     .map(rowToDsa);
 }
 
-export function listSdForCompany(companySlug: string): SdProblemRow[] {
-  ensureDataLoaded();
+export async function listSdForCompany(companySlug: string): Promise<SdProblemRow[]> {
+  await ensureDataLoaded();
   const db = getDb();
-  const rows = db.select().from(sdProblems).all();
+  const rows = await db.select().from(sdProblems);
   return rows
     .filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(companySlug))
     .map(rowToSd);
 }
 
-export function getDsaBySlug(slug: string): DsaProblemRow | null {
-  ensureDataLoaded();
+export async function getDsaBySlug(slug: string): Promise<DsaProblemRow | null> {
+  await ensureDataLoaded();
   const db = getDb();
-  const r = db.select().from(dsaProblems).where(eq(dsaProblems.slug, slug)).get();
+  const rows = await db.select().from(dsaProblems).where(eq(dsaProblems.slug, slug)).limit(1);
+  const r = rows[0];
   return r ? rowToDsa(r) : null;
 }
 
-export function getSdBySlug(slug: string): SdProblemRow | null {
-  ensureDataLoaded();
+export async function getSdBySlug(slug: string): Promise<SdProblemRow | null> {
+  await ensureDataLoaded();
   const db = getDb();
-  const r = db.select().from(sdProblems).where(eq(sdProblems.slug, slug)).get();
+  const rows = await db.select().from(sdProblems).where(eq(sdProblems.slug, slug)).limit(1);
+  const r = rows[0];
   return r ? rowToSd(r) : null;
 }
 
-export function getLatestSuccessfulIngest(): IngestRunRow | null {
-  ensureDataLoaded();
+export async function getLatestSuccessfulIngest(): Promise<IngestRunRow | null> {
+  await ensureDataLoaded();
   const db = getDb();
-  const r = db
+  const rows = await db
     .select()
     .from(ingestRuns)
     .where(eq(ingestRuns.status, "ok"))
     .orderBy(desc(ingestRuns.finishedAt))
-    .limit(1)
-    .get();
+    .limit(1);
+  const r = rows[0];
   if (!r) return null;
   return {
     id: r.id,
@@ -157,26 +158,27 @@ export function getLatestSuccessfulIngest(): IngestRunRow | null {
   };
 }
 
-export function listLldForCompany(companySlug: string): LldProblemRow[] {
-  ensureDataLoaded();
+export async function listLldForCompany(companySlug: string): Promise<LldProblemRow[]> {
+  await ensureDataLoaded();
   const db = getDb();
-  const rows = db.select().from(lldProblems).all();
+  const rows = await db.select().from(lldProblems);
   return rows
     .filter((r) => (JSON.parse(r.companiesJson || "[]") as string[]).includes(companySlug))
     .map(rowToLld);
 }
 
-export function listAllLld(): LldProblemRow[] {
-  ensureDataLoaded();
+export async function listAllLld(): Promise<LldProblemRow[]> {
+  await ensureDataLoaded();
   const db = getDb();
-  const rows = db.select().from(lldProblems).all();
+  const rows = await db.select().from(lldProblems);
   return rows.map(rowToLld).sort((a, b) => a.title.localeCompare(b.title));
 }
 
-export function getLldBySlug(slug: string): LldProblemRow | null {
-  ensureDataLoaded();
+export async function getLldBySlug(slug: string): Promise<LldProblemRow | null> {
+  await ensureDataLoaded();
   const db = getDb();
-  const r = db.select().from(lldProblems).where(eq(lldProblems.slug, slug)).get();
+  const rows = await db.select().from(lldProblems).where(eq(lldProblems.slug, slug)).limit(1);
+  const r = rows[0];
   return r ? rowToLld(r) : null;
 }
 

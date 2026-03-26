@@ -1,7 +1,7 @@
 import { getLatestSuccessfulIngest } from "@/lib/data/queries";
 
-export function Footer() {
-  const ingest = getLatestSuccessfulIngest();
+export async function Footer() {
+  const ingest = await getLatestSuccessfulIngest();
   const last = ingest?.finishedAt
     ? new Date(ingest.finishedAt).toLocaleString(undefined, {
         dateStyle: "medium",
@@ -10,19 +10,21 @@ export function Footer() {
     : null;
 
   return (
-    <footer className="border-t border-border/70 bg-muted/30">
-      <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-center text-sm sm:text-left">
-        <p className="text-muted-foreground">
-          Problem and design lists refresh via ingest (daily cron or{" "}
-          <code className="text-foreground rounded bg-background px-1 text-xs">pnpm ingest</code>).
+    <footer className="border-t border-border/40 bg-muted/20">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-4 py-6 text-center sm:flex-row sm:justify-between sm:text-left">
+        <p className="text-xs text-muted-foreground">
+          Data refreshes via daily cron or{" "}
+          <code className="rounded bg-muted px-1.5 py-0.5 text-[11px] font-mono text-foreground">
+            pnpm ingest
+          </code>
         </p>
-        <p className="text-muted-foreground">
+        <p className="text-xs text-muted-foreground">
           {last ? (
             <>
-              Last successful sync: <span className="text-foreground font-medium">{last}</span>
+              Last sync: <span className="font-medium text-foreground">{last}</span>
             </>
           ) : (
-            <>No ingest run yet. Seed data is used until first sync.</>
+            "Using seed data"
           )}
         </p>
       </div>

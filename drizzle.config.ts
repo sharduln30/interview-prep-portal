@@ -1,13 +1,13 @@
 import { defineConfig } from "drizzle-kit";
-import path from "path";
+
+const url =
+  process.env.POSTGRES_URL ?? process.env.DATABASE_URL ?? "postgresql://127.0.0.1:5432/placeholder";
 
 export default defineConfig({
   schema: "./src/db/schema.ts",
   out: "./drizzle",
-  dialect: "sqlite",
+  dialect: "postgresql",
   dbCredentials: {
-    url: process.env.DATABASE_PATH
-      ? `file:${process.env.DATABASE_PATH}`
-      : `file:${path.join(process.cwd(), "data", "app.db")}`,
+    url,
   },
 });

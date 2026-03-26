@@ -17,8 +17,6 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Interview Prep Portal",
   description: "Company-wise DSA, system design, and AI-assisted study",
@@ -35,7 +33,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="flex min-h-screen flex-col">
             <Navbar />
-            <main className="flex-1 bg-gradient-to-b from-background via-background to-muted/20">{children}</main>
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>
