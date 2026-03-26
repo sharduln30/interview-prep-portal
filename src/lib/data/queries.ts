@@ -1,4 +1,4 @@
-import { count, desc, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import { dsaProblems, ingestRuns, lldProblems, sdProblems } from "@/db/schema";
 import companies from "@/lib/data/companies.json";

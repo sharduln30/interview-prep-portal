@@ -7,7 +7,6 @@ import { useTheme } from "next-themes";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/lib/button-variants";
 import { cn } from "@/lib/utils";
 import { ApiKeySettings } from "@/components/ApiKeySettings";
 
