@@ -1,0 +1,48 @@
+[
+  {
+    "slug": "parking-lot",
+    "title": "Design Parking Lot",
+    "companies": ["google", "amazon", "uber", "microsoft"],
+    "category": "Object Modeling",
+    "difficulty": "Medium",
+    "prompt": "Design a parking lot supporting multiple spot types, entry/exit gates, ticketing, and pricing.",
+    "solutionMarkdown": "## Clarify requirements\n- Multi-floor lot with spot types: bike, car, truck.\n- Ticket generated at entry and paid at exit.\n\n## Core objects\n- `ParkingLot`, `Floor`, `ParkingSpot`, `Vehicle`, `Ticket`, `Gate`, `PaymentService`.\n\n## Design choices\n- Strategy pattern for fee calculation.\n- Repository abstraction for persistence.\n- Slot allocation via nearest-available index per vehicle type.\n\n## Trade-offs\n- In-memory availability index is fast but needs rebuild after restart.\n- Strict transaction boundaries needed at entry/exit to avoid duplicate allocations."
+  },
+  {
+    "slug": "elevator-system",
+    "title": "Design Elevator Control System",
+    "companies": ["google", "microsoft", "amazon"],
+    "category": "Scheduling",
+    "difficulty": "Hard",
+    "prompt": "Design an elevator system for a high-rise supporting hall calls and cabin requests with optimized scheduling.",
+    "solutionMarkdown": "## Clarify requirements\n- Multiple elevators, floor requests from hall + inside cabin.\n- Minimize wait and travel time.\n\n## Core objects\n- `ElevatorController`, `ElevatorCar`, `Request`, `Scheduler`, `Door`, `Motor`.\n\n## Design choices\n- SCAN-like scheduling (directional batching) for throughput.\n- Separate command queue per car.\n- Controller assigns hall calls by estimated time to pickup.\n\n## Trade-offs\n- Throughput optimization may hurt fairness for edge floors.\n- Add aging priority to reduce starvation."
+  },
+  {
+    "slug": "atm-machine",
+    "title": "Design ATM Machine",
+    "companies": ["amazon", "microsoft", "bloomberg"],
+    "category": "State Machine",
+    "difficulty": "Medium",
+    "prompt": "Design ATM software flow including authentication, balance inquiry, cash withdrawal, and receipt generation.",
+    "solutionMarkdown": "## Clarify requirements\n- Card + PIN authentication.\n- Core actions: withdraw, deposit, check balance.\n\n## Core objects\n- `Atm`, `Session`, `CardReader`, `BankService`, `CashDispenser`, `ReceiptPrinter`.\n\n## Design choices\n- State pattern for ATM session transitions.\n- Command handlers per action.\n- Bank service as external dependency with retries and idempotency keys.\n\n## Trade-offs\n- Keeping business logic in ATM client reduces latency but increases update complexity."
+  },
+  {
+    "slug": "book-my-show",
+    "title": "Design BookMyShow",
+    "companies": ["amazon", "uber", "google"],
+    "category": "Concurrency",
+    "difficulty": "Hard",
+    "prompt": "Design an online movie ticket booking platform with seat holds, payments, and cancellation flows.",
+    "solutionMarkdown": "## Clarify requirements\n- Browse shows by city/theater.\n- Seat selection with temporary lock.\n- Payment confirmation and ticket issue.\n\n## Core objects\n- `Show`, `Screen`, `Seat`, `SeatHold`, `Booking`, `Payment`, `InventoryService`.\n\n## Design choices\n- Seat hold with TTL and optimistic locking/version check.\n- Saga flow for payment + booking finalization.\n- Read model cache for availability heatmap.\n\n## Trade-offs\n- Short lock timeout improves utilization but can hurt UX."
+  },
+  {
+    "slug": "chess-game",
+    "title": "Design Chess Game",
+    "companies": ["google", "microsoft", "meta"],
+    "category": "Game Modeling",
+    "difficulty": "Hard",
+    "prompt": "Design a chess game engine covering board representation, move validation, and game state transitions.",
+    "solutionMarkdown": "## Clarify requirements\n- Two-player chess with full legal move validation.\n- Detect check/checkmate/stalemate.\n\n## Core objects\n- `Board`, `Piece` hierarchy, `Move`, `Game`, `RuleEngine`.\n\n## Design choices\n- Use immutable board snapshots for undo/history.\n- Piece polymorphism for move generation.\n- Rule engine validates king safety after candidate move.\n\n## Trade-offs\n- Immutable snapshots simplify correctness but increase memory pressure."
+  }
+]
+

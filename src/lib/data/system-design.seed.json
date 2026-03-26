@@ -1,0 +1,107 @@
+[
+  {
+    "slug": "url-shortener",
+    "title": "Design a URL shortener (e.g. bit.ly)",
+    "companies": ["google", "amazon", "meta", "uber", "microsoft", "netflix"],
+    "category": "Storage & APIs",
+    "difficulty": "Medium"
+  },
+  {
+    "slug": "ride-matching",
+    "title": "Design Uber / ride-hailing matching system",
+    "companies": ["uber", "amazon", "google"],
+    "category": "Geo & real-time",
+    "difficulty": "Hard"
+  },
+  {
+    "slug": "news-feed",
+    "title": "Design a social news feed (Twitter / Facebook)",
+    "companies": ["meta", "google", "amazon"],
+    "category": "Feed & ranking",
+    "difficulty": "Hard"
+  },
+  {
+    "slug": "distributed-cache",
+    "title": "Design a distributed cache (Redis-like)",
+    "companies": ["amazon", "microsoft", "google", "meta", "uber"],
+    "category": "Infrastructure",
+    "difficulty": "Hard"
+  },
+  {
+    "slug": "chat-system",
+    "title": "Design a real-time chat (WhatsApp / Messenger)",
+    "companies": ["meta", "google", "microsoft"],
+    "category": "Messaging",
+    "difficulty": "Hard"
+  },
+  {
+    "slug": "video-streaming",
+    "title": "Design Netflix / video streaming",
+    "companies": ["netflix", "amazon", "google"],
+    "category": "Media",
+    "difficulty": "Hard"
+  },
+  {
+    "slug": "web-crawler",
+    "title": "Design a web crawler",
+    "companies": ["google", "amazon", "microsoft"],
+    "category": "Search",
+    "difficulty": "Medium"
+  },
+  {
+    "slug": "rate-limiter",
+    "title": "Design a distributed rate limiter",
+    "companies": ["amazon", "google", "uber", "meta", "microsoft"],
+    "category": "API gateway",
+    "difficulty": "Medium"
+  },
+  {
+    "slug": "notification-system",
+    "title": "Design a notification system (push, email, SMS)",
+    "companies": ["uber", "amazon", "meta", "google"],
+    "category": "Messaging",
+    "difficulty": "Medium"
+  },
+  {
+    "slug": "search-autocomplete",
+    "title": "Design search typeahead / autocomplete at scale",
+    "companies": ["google", "amazon", "uber"],
+    "category": "Search",
+    "difficulty": "Medium"
+  },
+  {
+    "slug": "payment-system",
+    "title": "Design a payment / wallet system",
+    "companies": ["uber", "amazon", "google", "apple"],
+    "category": "Payments",
+    "difficulty": "Hard"
+  },
+  {
+    "slug": "file-storage",
+    "title": "Design Dropbox / Google Drive",
+    "companies": ["google", "microsoft", "apple"],
+    "category": "Storage",
+    "difficulty": "Hard"
+  },
+  {
+    "slug": "ticket-booking",
+    "title": "Design Ticketmaster / concert booking",
+    "companies": ["amazon", "uber", "meta"],
+    "category": "E-commerce",
+    "difficulty": "Medium"
+  },
+  {
+    "slug": "location-service",
+    "title": "Design a location / maps service",
+    "companies": ["google", "uber", "apple"],
+    "category": "Geo",
+    "difficulty": "Hard"
+  },
+  {
+    "slug": "metrics-monitoring",
+    "title": "Design a metrics & monitoring system (Datadog-like)",
+    "companies": ["amazon", "google", "microsoft", "meta", "uber"],
+    "category": "Observability",
+    "difficulty": "Medium"
+  }
+]

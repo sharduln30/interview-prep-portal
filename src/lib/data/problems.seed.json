@@ -1,0 +1,162 @@
+[
+  {
+    "slug": "two-sum",
+    "title": "Two Sum",
+    "difficulty": "Easy",
+    "topics": ["Array", "Hash Table"],
+    "companies": ["uber", "google", "amazon", "meta", "microsoft", "apple", "bloomberg"],
+    "frequency": 100
+  },
+  {
+    "slug": "three-sum",
+    "title": "3Sum",
+    "difficulty": "Medium",
+    "topics": ["Array", "Two Pointers", "Sorting"],
+    "companies": ["uber", "amazon", "meta", "bloomberg"],
+    "frequency": 92
+  },
+  {
+    "slug": "merge-intervals",
+    "title": "Merge Intervals",
+    "difficulty": "Medium",
+    "topics": ["Array", "Sorting"],
+    "companies": ["google", "uber", "amazon", "meta", "microsoft"],
+    "frequency": 88
+  },
+  {
+    "slug": "lru-cache",
+    "title": "LRU Cache",
+    "difficulty": "Medium",
+    "topics": ["Hash Table", "Linked List", "Design"],
+    "companies": ["uber", "amazon", "google", "meta", "microsoft", "netflix"],
+    "frequency": 85
+  },
+  {
+    "slug": "design-twitter",
+    "title": "Design Twitter",
+    "difficulty": "Medium",
+    "topics": ["Hash Table", "Linked List", "Design", "Heap"],
+    "companies": ["meta", "google", "amazon"],
+    "frequency": 45
+  },
+  {
+    "slug": "number-of-islands",
+    "title": "Number of Islands",
+    "difficulty": "Medium",
+    "topics": ["DFS", "BFS", "Union Find", "Matrix"],
+    "companies": ["amazon", "uber", "google", "microsoft", "meta"],
+    "frequency": 90
+  },
+  {
+    "slug": "course-schedule",
+    "title": "Course Schedule",
+    "difficulty": "Medium",
+    "topics": ["Graph", "Topological Sort", "BFS"],
+    "companies": ["amazon", "uber", "google", "meta", "apple"],
+    "frequency": 78
+  },
+  {
+    "slug": "binary-search",
+    "title": "Binary Search",
+    "difficulty": "Easy",
+    "topics": ["Array", "Binary Search"],
+    "companies": ["amazon", "microsoft", "google", "meta"],
+    "frequency": 70
+  },
+  {
+    "slug": "minimum-window-substring",
+    "title": "Minimum Window Substring",
+    "difficulty": "Hard",
+    "topics": ["Hash Table", "String", "Sliding Window"],
+    "companies": ["google", "uber", "amazon", "meta", "microsoft"],
+    "frequency": 82
+  },
+  {
+    "slug": "longest-substring-without-repeating-characters",
+    "title": "Longest Substring Without Repeating Characters",
+    "difficulty": "Medium",
+    "topics": ["Hash Table", "String", "Sliding Window"],
+    "companies": ["amazon", "bloomberg", "google", "meta", "microsoft", "uber"],
+    "frequency": 95
+  },
+  {
+    "slug": "valid-parentheses",
+    "title": "Valid Parentheses",
+    "difficulty": "Easy",
+    "topics": ["String", "Stack"],
+    "companies": ["amazon", "bloomberg", "google", "meta", "microsoft", "uber"],
+    "frequency": 88
+  },
+  {
+    "slug": "merge-k-sorted-lists",
+    "title": "Merge k Sorted Lists",
+    "difficulty": "Hard",
+    "topics": ["Linked List", "Divide and Conquer", "Heap"],
+    "companies": ["amazon", "google", "meta", "uber", "microsoft"],
+    "frequency": 80
+  },
+  {
+    "slug": "kth-largest-element-in-an-array",
+    "title": "Kth Largest Element in an Array",
+    "difficulty": "Medium",
+    "topics": ["Array", "Divide and Conquer", "Sorting", "Heap"],
+    "companies": ["amazon", "meta", "microsoft", "uber"],
+    "frequency": 76
+  },
+  {
+    "slug": "word-search",
+    "title": "Word Search",
+    "difficulty": "Medium",
+    "topics": ["Array", "Backtracking", "Matrix"],
+    "companies": ["amazon", "microsoft", "uber", "google"],
+    "frequency": 72
+  },
+  {
+    "slug": "clone-graph",
+    "title": "Clone Graph",
+    "difficulty": "Medium",
+    "topics": ["Hash Table", "DFS", "BFS", "Graph"],
+    "companies": ["meta", "google", "amazon", "microsoft", "uber"],
+    "frequency": 55
+  },
+  {
+    "slug": "serialize-and-deserialize-binary-tree",
+    "title": "Serialize and Deserialize Binary Tree",
+    "difficulty": "Hard",
+    "topics": ["String", "Tree", "DFS", "BFS", "Design"],
+    "companies": ["amazon", "microsoft", "uber", "google", "meta"],
+    "frequency": 68
+  },
+  {
+    "slug": "top-k-frequent-elements",
+    "title": "Top K Frequent Elements",
+    "difficulty": "Medium",
+    "topics": ["Array", "Hash Table", "Divide and Conquer", "Sorting", "Heap"],
+    "companies": ["amazon", "meta", "google", "uber", "bloomberg"],
+    "frequency": 74
+  },
+  {
+    "slug": "median-of-two-sorted-arrays",
+    "title": "Median of Two Sorted Arrays",
+    "difficulty": "Hard",
+    "topics": ["Array", "Binary Search", "Divide and Conquer"],
+    "companies": ["google", "amazon", "microsoft", "apple", "uber"],
+    "frequency": 60
+  },
+  {
+    "slug": "trapping-rain-water",
+    "title": "Trapping Rain Water",
+    "difficulty": "Hard",
+    "topics": ["Array", "Two Pointers", "Dynamic Programming", "Stack"],
+    "companies": ["amazon", "bloomberg", "google", "meta", "uber"],
+    "frequency": 70
+  },
+  {
+    "slug": "design-search-autocomplete-system",
+    "title": "Design Search Autocomplete System",
+    "difficulty": "Hard",
+    "topics": ["String", "Design", "Trie", "Heap"],
+    "companies": ["google", "amazon", "uber", "meta"],
+    "frequency": 40
+  }
+]

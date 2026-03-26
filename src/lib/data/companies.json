@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "uber",
+    "name": "Uber",
+    "leetcodeTag": "uber",
+    "accent": "#000000"
+  },
+  {
+    "slug": "google",
+    "name": "Google",
+    "leetcodeTag": "google",
+    "accent": "#4285F4"
+  },
+  {
+    "slug": "amazon",
+    "name": "Amazon",
+    "leetcodeTag": "amazon",
+    "accent": "#FF9900"
+  },
+  {
+    "slug": "meta",
+    "name": "Meta",
+    "leetcodeTag": "facebook",
+    "accent": "#0668E1"
+  },
+  {
+    "slug": "microsoft",
+    "name": "Microsoft",
+    "leetcodeTag": "microsoft",
+    "accent": "#00A4EF"
+  },
+  {
+    "slug": "apple",
+    "name": "Apple",
+    "leetcodeTag": "apple",
+    "accent": "#555555"
+  },
+  {
+    "slug": "bloomberg",
+    "name": "Bloomberg",
+    "leetcodeTag": "bloomberg",
+    "accent": "#2800D7"
+  },
+  {
+    "slug": "netflix",
+    "name": "Netflix",
+    "leetcodeTag": "netflix",
+    "accent": "#E50914"
+  }
+]
